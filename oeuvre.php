@@ -1,7 +1,7 @@
 <?php
 include("header.php");
 
-if(isset($_GET["id"]) && !empty($_GET["id"])){ 
+if(isset($_GET["id"])){ 
     $id = $_GET["id"];
     $o = null;
     include("oeuvres.php");
@@ -13,6 +13,10 @@ if(isset($_GET["id"]) && !empty($_GET["id"])){
             $o = $oeuvre;
         }
     }
+
+    if($o != null){
+
+    
 ?>
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
@@ -25,7 +29,15 @@ if(isset($_GET["id"]) && !empty($_GET["id"])){
     </div>
 </article>
 <?php 
+    }
+    else {
+        echo "<p>Erreur: cette oeuvre n'existe pas.</p>";
+    }
 } 
+else 
+{
+    echo "<p>Erreur: cette page n'existe pas.</p>";
+}
 
 include("footer.php");
 ?>
