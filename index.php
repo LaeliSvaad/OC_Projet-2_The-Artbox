@@ -1,9 +1,10 @@
 <?php 
     include("header.php");
-    $PDO = include("bdd.php");
+    include("bdd.php");
 
+    $db = db_connexion();
     $req = 'SELECT * FROM oeuvres';
-    $stmt = $PDO->query($req);
+    $stmt = $db->query($req);
     $oeuvres = $stmt->fetchAll();
 ?>
 
