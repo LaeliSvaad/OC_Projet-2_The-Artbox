@@ -4,17 +4,18 @@
 
     $db = db_connexion();
     $req = 'SELECT * FROM oeuvres';
-    $stmt = $db->query($req);
-    $oeuvres = $stmt->fetchAll();
+    $stmt = $db->prepare($req);
+    $stmt->execute();
+    $paintings = $stmt->fetchAll();
 ?>
 
 <div id="liste-oeuvres">
-<?php foreach ($oeuvres as $oeuvre):  ?>             
+<?php foreach ($paintings as $painting):  ?>             
     <article class="oeuvre">
-        <a href="oeuvre.php?id=<?= $oeuvre["ID"] ?>">
-            <img src="img/<?= $oeuvre['img_url'] ?>" alt="<?= $oeuvre['title'] ?>">
-            <h2><?= $oeuvre['title'] ?></h2>
-            <p class="description"><?= $oeuvre['author'] ?></p>
+        <a href="oeuvre.php?id=<?= $painting["ID"] ?>">
+            <img src="img/<?= $painting['img_url'] ?>" alt="<?= $painting['title'] ?>">
+            <h2><?= $painting['title'] ?></h2>
+            <p class="description"><?= $painting['author'] ?></p>
         </a>
     </article>
 <?php endforeach; ?>

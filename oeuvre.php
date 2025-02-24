@@ -1,41 +1,37 @@
 <?php
-//Controller
-    $oeuvres = include("oeuvres.php");
+include("bdd.php");
 
-    //si "id" n'existe pas dans l'url, $id prend 0 pour valeur
-    $id = $_GET["id"] ?? 0;
-
-    //on initie cette variable pour gérer les erreurs par la suite
-    $oeuvre_existante= false;
-
-    //L'oeuvre est-elle dans le tableau? 
-    //Si oui, on la récupère dans $oeuvre et on passe $oeuvre_existante à true
-    foreach($oeuvres as $oeuvre)
-    {
-        if($oeuvre["id"] == $id)
-        {
-            $oeuvre_existante = true;
-            break;
-        }
-    }
+/*error handling variable*/
+$existing_painting = false;
+/*if "id" does not exist in the url, $id takes false as its value*/
+$id = $_GET["id"] ?? false;
+    
+if($id !== false){
+    $db = db_connexion();
+    $req = 'SELECT title, author, description, img_url FROM oeuvres WHERE ID = :id';
+    $stmt = $db->prepare($req);
+    $stmt->execute(['id' => $id]);
+    $painting = $stmt->fetchAll();
+    if(count($painting) != 0)
+        $existing_painting = true;
+}
 ?>
 
-<!-- Vue -->
-    <?php include("header.php"); ?>
+<?php include("header.php"); ?>
 
-    <?php if ($oeuvre_existante): ?>
-    <article id="detail-oeuvre">
-        <div id="img-oeuvre">
-            <img src="img/<?= $oeuvre["img_src"] ?>" alt="<?= $oeuvre["title"] ?>">
-        </div>
-        <div id="contenu-oeuvre">
-            <h1><?= $oeuvre["title"] ?></h1>
-            <p class="description"><?= $oeuvre["author"] ?></p>
-            <p class="description-complete"><?= $oeuvre["description"] ?></p>
-        </div>
-    </article>
-    <?php else: ?>
-        <p>Erreur: cette oeuvre n'existe pas.</p>
-    <?php endif; ?>
+<?php if ($existing_painting): ?>
+<article id="detail-oeuvre">
+    <div id="img-oeuvre">
+        <img src="img/<?= $painting[0]["img_url"] ?>" alt="<?= $painting[0]["title"] ?>">
+    </div>
+    <div id="contenu-oeuvre">
+        <h1><?= $painting[0]["title"] ?></h1>
+        <p class="description"><?= $painting[0]["author"] ?></p>
+        <p class="description-complete"><?= $painting[0]["description"] ?></p>
+    </div>
+</article>
+<?php else: header('Location: index.php');?>
+    
+<?php endif; ?>
 
-    <?php include("footer.php"); ?>
+<?php include("footer.php"); ?>
