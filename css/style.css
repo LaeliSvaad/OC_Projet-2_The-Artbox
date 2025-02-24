@@ -94,7 +94,7 @@ footer {
     display: block;
 }
 
-.form-block{
+.form-block, .server_response{
     width: 60%;
     margin: 30px auto;
     padding: 30px;
@@ -112,7 +112,12 @@ footer {
     align-items: flex-start;
     column-gap: 30px;
 }
+
 .form-row:last-child > input{
+    margin: auto;
+}
+
+.server_response:last-child > a{
     margin: auto;
 }
 

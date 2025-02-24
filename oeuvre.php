@@ -1,5 +1,5 @@
 <?php
-include("bdd.php");
+include("fonctions.php");
 
 /****CONTROLLER****/
 /*error handling variable*/
@@ -7,11 +7,7 @@ $existing_painting = false;
 /*if "id" does not exist in the url, $id takes false as its value*/
 $id = $_GET["id"] ?? NULL;
 if($id !== NULL){
-    $db = db_connexion();
-    $req = 'SELECT title, author, description, img_url FROM oeuvres WHERE ID = :id';
-    $stmt = $db->prepare($req);
-    $stmt->execute(['id' => $id]);
-    $painting = $stmt->fetchAll();
+    $painting = getPainting($id);
     if(count($painting) != 0)
         $existing_painting = true;
 }
