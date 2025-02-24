@@ -22,7 +22,7 @@ if($id !== false){
 <?php if ($existing_painting): ?>
 <article id="detail-oeuvre">
     <div id="img-oeuvre">
-        <img src="img/<?= $painting[0]["img_url"] ?>" alt="<?= $painting[0]["title"] ?>">
+        <img src="<?= $painting[0]["img_url"] ?>" alt="<?= $painting[0]["title"] ?>">
     </div>
     <div id="contenu-oeuvre">
         <h1><?= $painting[0]["title"] ?></h1>

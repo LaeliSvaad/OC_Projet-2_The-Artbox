@@ -94,6 +94,28 @@ footer {
     display: block;
 }
 
+.form-block{
+    width: 60%;
+    margin: 30px auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    background-color: #f0b7761a;
+    border: 1px solid #f0b7761a;
+    border-radius: 20px;
+}
+
+.form-row{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    column-gap: 30px;
+}
+.form-row:last-child > input{
+    margin: auto;
+}
+
 #contenu-oeuvre {
     max-width: 470px;
 }
