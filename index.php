@@ -1,12 +1,8 @@
 <?php 
     include("header.php");
-    include("bdd.php");
+    include("fonctions.php");
 
-    $db = db_connexion();
-    $req = 'SELECT * FROM oeuvres';
-    $stmt = $db->prepare($req);
-    $stmt->execute();
-    $paintings = $stmt->fetchAll();
+    $paintings = getPaintings();
 ?>
 
 <div id="liste-oeuvres">

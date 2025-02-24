@@ -23,4 +23,12 @@ function getPainting($id){
     $stmt->execute(['id' => $id]);
     return $stmt->fetchAll();
 }
+
+function getPaintings(){
+    $db = db_connexion();
+    $req = 'SELECT * FROM oeuvres';
+    $stmt = $db->prepare($req);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
 ?>
