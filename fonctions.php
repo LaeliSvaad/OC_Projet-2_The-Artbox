@@ -14,6 +14,7 @@ function insertNewPainting($title, $author, $description, $img_url){
                     'author' => $author,
                     'description' => $description,
                     'img_url' => $img_url]);
+    return $db->lastInsertId();
 }
 
 function getPainting($id){

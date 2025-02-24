@@ -10,8 +10,8 @@ $description = htmlspecialchars($_POST["description"]) ?? NULL;
 if($title == NULL || $author == NULL || !validateImgURL($img_url) || strlen($description) < 3)
     echo "<div class='server_response'>Une erreur est survenue.<br>";
 else{
-    insertNewPainting($title, $author, $description, $img_url);
-    echo "<div class='server_response'>Les données ont été ajoutées.<br>";
+    $id = insertNewPainting($title, $author, $description, $img_url);
+    echo "<div class='server_response'>Les données ont été ajoutées. <a href='oeuvre.php?id=". $id ."'>Voir l'oeuvre</a><br>";
 }
 
 echo"<a href='./ajouter.php'><button>Retourner au formulaire</button></a></div>";
